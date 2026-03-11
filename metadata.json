@@ -1,0 +1,5 @@
+{
+  "name": "TaskAssign",
+  "description": "Internal employee task management and assignment portal with real-time status tracking.",
+  "requestFramePermissions": []
+}

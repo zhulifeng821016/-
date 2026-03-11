@@ -1,0 +1,44 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "An employee or administrator in the system.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "name": { "type": "string", "description": "Full name of the employee" },
+        "email": { "type": "string", "format": "email", "description": "Email address" },
+        "role": { "type": "string", "enum": ["admin", "employee"], "description": "User role" },
+        "photoUrl": { "type": "string", "description": "Profile picture URL" }
+      },
+      "required": ["uid", "name", "role"]
+    },
+    "Task": {
+      "title": "Task",
+      "description": "A task assigned to an employee.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "Task title" },
+        "goal": { "type": "string", "description": "Primary objective of the task" },
+        "processDetails": { "type": "array", "items": { "type": "string" }, "description": "Step-by-step instructions" },
+        "status": { "type": "string", "enum": ["pending", "in-progress", "completed"], "description": "Current status" },
+        "priority": { "type": "string", "enum": ["high", "medium", "low"], "description": "Priority level" },
+        "assignedToUid": { "type": "string", "description": "UID of the assigned employee" },
+        "postedAt": { "type": "string", "format": "date-time", "description": "When the task was created" },
+        "dueAt": { "type": "string", "format": "date-time", "description": "Due date/time" },
+        "createdByUid": { "type": "string", "description": "UID of the admin who created the task" }
+      },
+      "required": ["title", "status", "priority", "assignedToUid", "postedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile documents"
+    },
+    "/tasks/{taskId}": {
+      "schema": "Task",
+      "description": "Task documents"
+    }
+  }
+}
